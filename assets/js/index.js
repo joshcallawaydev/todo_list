@@ -7,6 +7,8 @@ const todoButton = document.querySelector(".todo-button");
 const todoList = document.querySelector(".todo-list");
 const filterOption = document.querySelector(".filter-todo");
 
+// event listeners 
+
 document.addEventListener('DOMContentLoaded', getTodos)
 todoButton.addEventListener("click", addTodo); // Event listener
 todoList.addEventListener("click", deleteCheck);
@@ -42,6 +44,26 @@ function addTodo(event) {
 }
 
 // delete todo function needed
+
+function deleteCheck() {
+
+    // delete todo
+    const item = e.target;
+    if (item.classList[0] === "trash-btn") {
+        const todo = item.parentElement;
+        todo.classList.add("fall"); // animate then remove
+        removeLocalTodos(todo);
+        todo.addEventListener("transitionend", function () {
+            todo.remove();
+        });
+    }
+
+    if (item.classList[0] === "complete-btn") { // complete todo
+        const todo = item.parentElement;
+        todo.classList.toggle("completed");
+    }
+
+}
 
 // filter todo??
 
